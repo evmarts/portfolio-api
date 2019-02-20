@@ -4,8 +4,16 @@
   "description": "backend for my portfolio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
-  "author": "Evan Marts",
-  "license": "ISC"
+  "author": "Evan Martin",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "instagram-private-api": "^0.6.8",
+    "knex": "^0.16.3",
+    "pg": "^7.8.0"
+  }
 }
