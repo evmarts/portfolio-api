@@ -13,7 +13,17 @@ const {
 } = require("../../helpers/helpers.js");
 
 router.get("/", async (req, res) => {
-  res.send(await knex("accounts").select());
+  res.send(
+    (await knex.raw(
+      `select 
+      count(*) as total_accounts,
+      sum(follower_count) as total_followers, 
+      sum(media_count) as total_medias, 
+      sum(comment_count) as total_comments, 
+      sum(like_count) as total_likes
+      from accounts`
+    )).rows[0]
+  );
 });
 
 // return counts for an Instagram network
