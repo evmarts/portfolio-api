@@ -20,7 +20,8 @@ router.get("/", async (req, res) => {
       sum(follower_count) as total_followers, 
       sum(media_count) as total_medias, 
       sum(comment_count) as total_comments, 
-      sum(like_count) as total_likes
+      sum(like_count) as total_likes,
+      sum(view_count) as total_views
       from accounts`
     )).rows[0]
   );
@@ -45,7 +46,7 @@ router.put("/", async (req, res) => {
     console.log("got user");
     let media = await getMedia(session, id);
     console.log("got media");
-    
+
     // get number of followers of this account
     let followerCount = user._params.followerCount;
 
