@@ -45,9 +45,7 @@ router.put("/", async (req, res) => {
     console.log("got user");
     let media = await getMedia(session, id);
     console.log("got media");
-
-    console.log(media);
-
+    
     // get number of followers of this account
     let followerCount = user._params.followerCount;
 
