@@ -46,6 +46,8 @@ router.put("/", async (req, res) => {
     let media = await getMedia(session, id);
     console.log("got media");
 
+    console.log(media);
+
     // get number of followers of this account
     let followerCount = user._params.followerCount;
 
@@ -62,6 +64,17 @@ router.put("/", async (req, res) => {
       .map(m => m._params.likeCount)
       .reduce((acc, e) => acc + e);
 
+    // get number of views on posts of this account
+    let viewCount = media
+      .map(m => {
+        if (m._params.viewCount) {
+          return m._params.viewCount;
+        } else {
+          return 0;
+        }
+      })
+      .reduce((acc, e) => acc + e);
+
     // insert counts into database
     console.log("deleting old row...");
     await knex("accounts")
@@ -73,7 +86,8 @@ router.put("/", async (req, res) => {
       like_count: likeCount,
       media_count: mediaCount,
       follower_count: followerCount,
-      comment_count: commentCount
+      comment_count: commentCount,
+      view_count: viewCount
     });
   }
 });
